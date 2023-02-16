@@ -1,0 +1,19 @@
+.navbar{
+    width: 90vw;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-up-btn{
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(115, 115, 115);
+    color: white;
+    font-size: 0.9rem;
+    padding: 9px;
+}
+
+
