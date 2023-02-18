@@ -30,6 +30,7 @@ menIndex = 99
 watIndex = 0
 
 
+
 #DATAFRAMES
 
 
@@ -134,16 +135,19 @@ def addWater() :
 
 
 
-
-
-
 #TKINTER GUI
+
+
+
 window = Tk()
 window.geometry("420x520")
-window.title("HealthApp")
+window.title("FitNotify")
 window.config(background="#000000")
 
-titleText = Label (window, text = "Health App" , font=('Comic Sans MS', 40, 'bold'), fg='#FFFFFF', bg='#000000')
+p1 = PhotoImage(file = 'icon.png')
+window.iconphoto(False, p1)
+
+titleText = Label (window, text = "FitNotify" , font=('Comic Sans MS', 40, 'bold'), fg='#FFFFFF', bg='#000000')
 titleText.place(x=70, y=45)
 
 meetingsText = Label (window, text="Meetings", font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
@@ -228,7 +232,7 @@ def updateInfo() :
     waterInLabel=Label (window, text = str(watIndex) + "L", font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
     waterInLabel.place(x=30, y=tempY+100)
 
-    waterRemLabel=Label (window, text = "Remaining:"+str(float(4.0)-float(watIndex))+"L", font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
+    waterRemLabel=Label (window, text = "Remaining:"+ str("%.2f" % (float(4.0)-float(watIndex)))+"L", font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
     waterRemLabel.place(x=30, y=tempY+150)
 
     
