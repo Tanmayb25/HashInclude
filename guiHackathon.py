@@ -11,15 +11,13 @@ import matplotlib.pyplot as plt
 
 
 
-
-
 def showNotif(message) :
     notification.notify(
             title = "Alert!",
             message=message ,
            
             # displaying time
-            timeout=7
+            timeout=1
 )
 
 
@@ -28,6 +26,20 @@ def plotGraph():
     graphData.plot(x="Time", y=["MentalIndex", "PhysicalIndex"], kind="line")
     print(graphData)
     plt.show()
+
+
+def addWater() :
+    global watIndex
+    watIndex=float(watIndex)
+
+    if (watIndex<4.0):
+        watIndex=watIndex+0.25
+        watIndex = ("%.2f" % watIndex)
+    else :
+        watIndex=4.0
+        watIndex = ("%.2f" % watIndex)
+        showNotif("Daily water intake complete!")
+
 
 
 graphData = pd.DataFrame({
@@ -56,10 +68,11 @@ curr_date = date.today()
 
 phyIndex = 99
 menIndex = 99
+watIndex = 0
 
 
 
-list_of_events = [{'kind': 'calendar#event',
+'''list_of_events = [{'kind': 'calendar#event',
   'etag': '"3353215715256000"',
   'id': '6ks34c1gc4qm6b9gcgpjcb9k6spm6bb2ckom8b9mc9i3ae1mcgpjapj468',
   'status': 'confirmed',
@@ -113,10 +126,10 @@ for items in list_of_events:
 
 df2 = pd.DataFrame(event_details)
 df1 = df2.sort_values(by=['sTime'],ascending=True)
-print(df1)
+print(df1)'''
 
 
-'''from apiclient.discovery import build
+from apiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pickle
 from google_auth_oauthlib.flow import Flow
@@ -175,7 +188,7 @@ df2 = pd.DataFrame(event_details)
 
 
 df1 = df2.sort_values(by=['sTime'],ascending=True)
-print(df1)'''
+print(df1)
 
 
 window = Tk()
@@ -183,60 +196,60 @@ window.geometry("420x520")
 window.title("HealthApp")
 window.config(background="#000000")
 
-titleText = Label (window, text = "Health App" , font=('Arial', 40, 'bold'), fg='#FFFFFF', bg='#000000')
+titleText = Label (window, text = "Health App" , font=('Comic Sans MS', 40, 'bold'), fg='#FFFFFF', bg='#000000')
 titleText.place(x=70, y=45)
 
-meetingsText = Label (window, text="Meetings", font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
-meetingsText.place(x=60, y=135)
+meetingsText = Label (window, text="Meetings", font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+meetingsText.place(x=50, y=135)
 
 tempY=180
 for ind in df1.index:
     #print(df1['Title'][ind], df['Time'][ind], df['Date'][ind])
-    tempTitle=Label(window, text = df1['Title'][ind],font=('Arial', 10, 'bold'), fg='#FFFFFF', bg='#000000')
-    tempTitle.place(x=60, y=tempY)
+    tempTitle=Label(window, text = df1['Title'][ind],font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
+    tempTitle.place(x=50, y=tempY)
                     
-    tempDate=Label(window, text = df1['Date'][ind],font=('Arial', 10, 'bold'), fg='#FFFFFF', bg='#000000')
-    tempDate.place(x=130, y=tempY)
+    tempDate=Label(window, text = df1['Date'][ind],font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
+    tempDate.place(x=200, y=tempY)
                    
-    tempsTime=Label(window, text = df1['sTime'][ind],font=('Arial', 10, 'bold'), fg='#FFFFFF', bg='#000000')
-    tempsTime.place(x=200, y=tempY)
+    tempsTime=Label(window, text = df1['sTime'][ind],font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
+    tempsTime.place(x=290, y=tempY)
     
     tempY=tempY+30
 
-waterTitle = Label(window, text = "Water Intake" , font=('Arial', 16, 'bold'), fg='#FFFFFF', bg='#000000')
+waterTitle = Label(window, text = "Water Intake" , font=('Comic Sans MS', 16, 'bold'), fg='#FFFFFF', bg='#000000')
 waterTitle.place(x=30, y=tempY+70)
 
-waterInLabel=Label (window, text = "6L" , font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
-waterInLabel.place(x=30, y=tempY+100)
 
-waterRemLabel=Label (window, text = "Remaining: 1L" , font=('Arial', 10, 'bold'), fg='#FFFFFF', bg='#000000')
-waterRemLabel.place(x=30, y=tempY+130)
+
+waterButton = Button(window, text="Add Water", command=addWater)
+waterButton.place(x=30, y=tempY+180)
+
 
 statsButton = Button(window, text="show stats", command=plotGraph)
-statsButton.place(x=30, y=tempY+150)
+statsButton.place(x=282, y=tempY+200)
 
 
-'''walkTitle = Label(window, text = "Steps" , font=('Arial', 16, 'bold'), fg='#FFFFFF', bg='#000000')
+'''walkTitle = Label(window, text = "Steps" , font=('Comic Sans MS', 16, 'bold'), fg='#FFFFFF', bg='#000000')
 walkTitle.place(x=30, y=tempY+170)
 
-walkInLabel=Label (window, text = "4098" , font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+walkInLabel=Label (window, text = "4098" , font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
 walkInLabel.place(x=30, y=tempY+200)
 
-walkRemLabel=Label (window, text = "3456" , font=('Arial', 10, 'bold'), fg='#FFFFFF', bg='#000000')
+walkRemLabel=Label (window, text = "3456" , font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
 walkRemLabel.place(x=30, y=tempY+230)'''
 
 
 
-phyTitle=Label (window, text = "Physical Index" , font=('Arial', 15, 'bold'), fg='#FFFFFF', bg='#000000')
+phyTitle=Label (window, text = "Physical Index" , font=('Comic Sans MS', 15, 'bold'), fg='#FFFFFF', bg='#000000')
 phyTitle.place(x=250, y=tempY+40)
 
-'''phyInLabel=Label (window, text = i , font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+'''phyInLabel=Label (window, text = i , font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
 phyInLabel.place(x=300, y=tempY+70)'''
 
-menTitle=Label (window, text = "Mental Index" , font=('Arial', 15, 'bold'), fg='#FFFFFF', bg='#000000')
+menTitle=Label (window, text = "Mental Index" , font=('Comic Sans MS', 15, 'bold'), fg='#FFFFFF', bg='#000000')
 menTitle.place(x=250, y=tempY+110)
 
-'''menInLabel=Label (window, text = "45" , font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+'''menInLabel=Label (window, text = "45" , font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
 menInLabel.place(x=300, y=tempY+140)'''
 
 
@@ -282,6 +295,7 @@ def updateInfo() :
     #updating the indexes
     global phyIndex
     global menIndex
+    global watIndex
     
     global curr_time
     curr_time = time.strftime("%H:%M:%S", time.localtime())
@@ -297,11 +311,17 @@ def updateInfo() :
 
 
     
-    phyInLabel=Label (window, text = phyIndex , font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+    phyInLabel=Label (window, text = phyIndex , font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
     phyInLabel.place(x=300, y=tempY+70)
 
-    menInLabel=Label (window, text = menIndex , font=('Arial', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+    menInLabel=Label (window, text = menIndex , font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
     menInLabel.place(x=300, y=tempY+140)
+
+    waterInLabel=Label (window, text = str(watIndex) + "L", font=('Comic Sans MS', 20, 'bold'), fg='#FFFFFF', bg='#000000')
+    waterInLabel.place(x=30, y=tempY+100)
+
+    waterRemLabel=Label (window, text = "Remaining:"+str(float(4.0)-float(watIndex))+"L", font=('Comic Sans MS', 10, 'bold'), fg='#FFFFFF', bg='#000000')
+    waterRemLabel.place(x=30, y=tempY+150)
 
     
     # Camera
@@ -344,7 +364,7 @@ def updateInfo() :
         '''flag = 1
         currTime = time.time()'''
         work+=1
-        if (work>=30):
+        if (work>=200):
             #messagebox.showinfo("reminder", "take a break")
             work=0
             phyIndex-=5
